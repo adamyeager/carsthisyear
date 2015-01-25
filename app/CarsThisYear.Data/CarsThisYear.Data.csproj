@@ -69,10 +69,16 @@
     <Compile Include="Engine.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeneralColor.cs">
+      <DependentUpon>CarsThisYearContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Make.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Model.cs">
+      <DependentUpon>CarsThisYearContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelColor.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelStyle.cs">
@@ -111,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CarsThisYearContext.edmx.sql" />
+    <Content Include="Scripts\DBSeed.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
