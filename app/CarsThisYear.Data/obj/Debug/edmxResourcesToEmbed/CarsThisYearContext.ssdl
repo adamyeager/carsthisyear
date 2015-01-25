@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarsThisYearContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CarsThisYearContextStoreContainer">
+    <EntitySet Name="Makes" EntityType="CarsThisYearContext.Store.Makes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Models" EntityType="CarsThisYearContext.Store.Models" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ModelStyles" EntityType="CarsThisYearContext.Store.ModelStyles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ModelTypes" EntityType="CarsThisYearContext.Store.ModelTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Engines" EntityType="CarsThisYearContext.Store.Engines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Drivetrains" EntityType="CarsThisYearContext.Store.Drivetrains" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transmissions" EntityType="CarsThisYearContext.Store.Transmissions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ModelColors" EntityType="CarsThisYearContext.Store.ModelColors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneralColors" EntityType="CarsThisYearContext.Store.GeneralColors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DrivetrainModelStyle" EntityType="CarsThisYearContext.Store.DrivetrainModelStyle" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransmissionModelStyle" EntityType="CarsThisYearContext.Store.TransmissionModelStyle" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="MakeModel" Association="CarsThisYearContext.Store.MakeModel">
+      <End Role="Make" EntitySet="Makes" />
+      <End Role="Model" EntitySet="Models" />
+    </AssociationSet>
+    <AssociationSet Name="ModelModelStyle" Association="CarsThisYearContext.Store.ModelModelStyle">
+      <End Role="Model" EntitySet="Models" />
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+    </AssociationSet>
+    <AssociationSet Name="ModelStyleModelType" Association="CarsThisYearContext.Store.ModelStyleModelType">
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+      <End Role="ModelType" EntitySet="ModelTypes" />
+    </AssociationSet>
+    <AssociationSet Name="EngineModelStyle" Association="CarsThisYearContext.Store.EngineModelStyle">
+      <End Role="Engine" EntitySet="Engines" />
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DrivetrainModelStyle_Drivetrain" Association="CarsThisYearContext.Store.FK_DrivetrainModelStyle_Drivetrain">
+      <End Role="Drivetrain" EntitySet="Drivetrains" />
+      <End Role="DrivetrainModelStyle" EntitySet="DrivetrainModelStyle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DrivetrainModelStyle_ModelStyle" Association="CarsThisYearContext.Store.FK_DrivetrainModelStyle_ModelStyle">
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+      <End Role="DrivetrainModelStyle" EntitySet="DrivetrainModelStyle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransmissionModelStyle_Transmission" Association="CarsThisYearContext.Store.FK_TransmissionModelStyle_Transmission">
+      <End Role="Transmission" EntitySet="Transmissions" />
+      <End Role="TransmissionModelStyle" EntitySet="TransmissionModelStyle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransmissionModelStyle_ModelStyle" Association="CarsThisYearContext.Store.FK_TransmissionModelStyle_ModelStyle">
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+      <End Role="TransmissionModelStyle" EntitySet="TransmissionModelStyle" />
+    </AssociationSet>
+    <AssociationSet Name="ModelStyleModelColor" Association="CarsThisYearContext.Store.ModelStyleModelColor">
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+      <End Role="ModelColor" EntitySet="ModelColors" />
+    </AssociationSet>
+    <AssociationSet Name="ModelColorGeneralColor" Association="CarsThisYearContext.Store.ModelColorGeneralColor">
+      <End Role="ModelColor" EntitySet="ModelColors" />
+      <End Role="GeneralColor" EntitySet="GeneralColors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Makes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EngineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Models">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MakeId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ModelStyles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EngineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ModelTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelStyle_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Engines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Drivetrains">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transmissions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ModelColors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelStyleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeneralColors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelColor_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="DrivetrainModelStyle">
+    <Key>
+      <PropertyRef Name="Drivetrains_Id" />
+      <PropertyRef Name="ModelStyles_Id" />
+    </Key>
+    <Property Name="Drivetrains_Id" Type="int" Nullable="false" />
+    <Property Name="ModelStyles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransmissionModelStyle">
+    <Key>
+      <PropertyRef Name="Transmissions_Id" />
+      <PropertyRef Name="ModelStyles_Id" />
+    </Key>
+    <Property Name="Transmissions_Id" Type="int" Nullable="false" />
+    <Property Name="ModelStyles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="MakeModel">
+    <End Role="Make" Type="CarsThisYearContext.Store.Makes" Multiplicity="1" />
+    <End Role="Model" Type="CarsThisYearContext.Store.Models" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Make">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="MakeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelModelStyle">
+    <End Role="Model" Type="CarsThisYearContext.Store.Models" Multiplicity="1" />
+    <End Role="ModelStyle" Type="CarsThisYearContext.Store.ModelStyles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelStyle">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelStyleModelType">
+    <End Role="ModelStyle" Type="CarsThisYearContext.Store.ModelStyles" Multiplicity="1" />
+    <End Role="ModelType" Type="CarsThisYearContext.Store.ModelTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModelStyle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelType">
+        <PropertyRef Name="ModelStyle_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EngineModelStyle">
+    <End Role="Engine" Type="CarsThisYearContext.Store.Engines" Multiplicity="1" />
+    <End Role="ModelStyle" Type="CarsThisYearContext.Store.ModelStyles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Engine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelStyle">
+        <PropertyRef Name="EngineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelStyleModelColor">
+    <End Role="ModelStyle" Type="CarsThisYearContext.Store.ModelStyles" Multiplicity="1" />
+    <End Role="ModelColor" Type="CarsThisYearContext.Store.ModelColors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModelStyle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelColor">
+        <PropertyRef Name="ModelStyleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelColorGeneralColor">
+    <End Role="ModelColor" Type="CarsThisYearContext.Store.ModelColors" Multiplicity="0..1" />
+    <End Role="GeneralColor" Type="CarsThisYearContext.Store.GeneralColors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModelColor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GeneralColor">
+        <PropertyRef Name="ModelColor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DrivetrainModelStyle_Drivetrain">
+    <End Role="Drivetrain" Type="CarsThisYearContext.Store.Drivetrains" Multiplicity="1" />
+    <End Role="DrivetrainModelStyle" Type="CarsThisYearContext.Store.DrivetrainModelStyle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivetrain">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DrivetrainModelStyle">
+        <PropertyRef Name="Drivetrains_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DrivetrainModelStyle_ModelStyle">
+    <End Role="DrivetrainModelStyle" Type="CarsThisYearContext.Store.DrivetrainModelStyle" Multiplicity="*" />
+    <End Role="ModelStyle" Type="CarsThisYearContext.Store.ModelStyles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ModelStyle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DrivetrainModelStyle">
+        <PropertyRef Name="ModelStyles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransmissionModelStyle_Transmission">
+    <End Role="Transmission" Type="CarsThisYearContext.Store.Transmissions" Multiplicity="1" />
+    <End Role="TransmissionModelStyle" Type="CarsThisYearContext.Store.TransmissionModelStyle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transmission">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransmissionModelStyle">
+        <PropertyRef Name="Transmissions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransmissionModelStyle_ModelStyle">
+    <End Role="TransmissionModelStyle" Type="CarsThisYearContext.Store.TransmissionModelStyle" Multiplicity="*" />
+    <End Role="ModelStyle" Type="CarsThisYearContext.Store.ModelStyles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ModelStyle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransmissionModelStyle">
+        <PropertyRef Name="ModelStyles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarsThisYearContextStoreContainer" CdmEntityContainer="CarsThisYearContextContainer">
+    <EntitySetMapping Name="Makes">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.Make)">
+        <MappingFragment StoreEntitySet="Makes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EngineId" ColumnName="EngineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.Model)">
+        <MappingFragment StoreEntitySet="Models">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="MakeId" ColumnName="MakeId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelStyles">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.ModelStyle)">
+        <MappingFragment StoreEntitySet="ModelStyles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EngineId" ColumnName="EngineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.ModelType)">
+        <MappingFragment StoreEntitySet="ModelTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Engines">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.Engine)">
+        <MappingFragment StoreEntitySet="Engines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Drivetrains">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.Drivetrain)">
+        <MappingFragment StoreEntitySet="Drivetrains">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transmissions">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.Transmission)">
+        <MappingFragment StoreEntitySet="Transmissions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelColors">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.ModelColor)">
+        <MappingFragment StoreEntitySet="ModelColors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModelStyleId" ColumnName="ModelStyleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralColors">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.GeneralColor)">
+        <MappingFragment StoreEntitySet="GeneralColors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ModelStyleModelType" TypeName="CarsThisYearContext.ModelStyleModelType" StoreEntitySet="ModelTypes">
+      <EndProperty Name="ModelStyle">
+        <ScalarProperty Name="Id" ColumnName="ModelStyle_Id" />
+      </EndProperty>
+      <EndProperty Name="ModelType">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DrivetrainModelStyle" TypeName="CarsThisYearContext.DrivetrainModelStyle" StoreEntitySet="DrivetrainModelStyle">
+      <EndProperty Name="Drivetrain">
+        <ScalarProperty Name="Id" ColumnName="Drivetrains_Id" />
+      </EndProperty>
+      <EndProperty Name="ModelStyle">
+        <ScalarProperty Name="Id" ColumnName="ModelStyles_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TransmissionModelStyle" TypeName="CarsThisYearContext.TransmissionModelStyle" StoreEntitySet="TransmissionModelStyle">
+      <EndProperty Name="Transmission">
+        <ScalarProperty Name="Id" ColumnName="Transmissions_Id" />
+      </EndProperty>
+      <EndProperty Name="ModelStyle">
+        <ScalarProperty Name="Id" ColumnName="ModelStyles_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ModelColorGeneralColor" TypeName="CarsThisYearContext.ModelColorGeneralColor" StoreEntitySet="GeneralColors">
+      <EndProperty Name="ModelColor">
+        <ScalarProperty Name="Id" ColumnName="ModelColor_Id" />
+      </EndProperty>
+      <EndProperty Name="GeneralColor">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="ModelColor_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

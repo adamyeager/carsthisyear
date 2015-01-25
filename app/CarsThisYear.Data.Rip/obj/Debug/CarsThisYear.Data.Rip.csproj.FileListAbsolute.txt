@@ -1,0 +1,12 @@
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\CarsThisYear.Data.Rip.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\CarsThisYear.Data.Rip.pdb
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\CarsThisYear.Data.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\HtmlAgilityPack.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\EntityFramework.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\CarsThisYear.Data.pdb
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\HtmlAgilityPack.pdb
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\HtmlAgilityPack.xml
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\bin\Debug\EntityFramework.xml
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\obj\Debug\CarsThisYear.Data.Rip.csprojResolveAssemblyReference.cache
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\obj\Debug\CarsThisYear.Data.Rip.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data.Rip\obj\Debug\CarsThisYear.Data.Rip.pdb

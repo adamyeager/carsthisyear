@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CarsThisYearContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="CarsThisYearContextContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Makes" EntityType="CarsThisYearContext.Make" />
+    <EntitySet Name="Models" EntityType="CarsThisYearContext.Model" />
+    <AssociationSet Name="MakeModel" Association="CarsThisYearContext.MakeModel">
+      <End Role="Make" EntitySet="Makes" />
+      <End Role="Model" EntitySet="Models" />
+    </AssociationSet>
+    <EntitySet Name="ModelStyles" EntityType="CarsThisYearContext.ModelStyle" />
+    <AssociationSet Name="ModelModelStyle" Association="CarsThisYearContext.ModelModelStyle">
+      <End Role="Model" EntitySet="Models" />
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+    </AssociationSet>
+    <EntitySet Name="ModelTypes" EntityType="CarsThisYearContext.ModelType" />
+    <AssociationSet Name="ModelStyleModelType" Association="CarsThisYearContext.ModelStyleModelType">
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+      <End Role="ModelType" EntitySet="ModelTypes" />
+    </AssociationSet>
+    <EntitySet Name="Engines" EntityType="CarsThisYearContext.Engine" />
+    <AssociationSet Name="EngineModelStyle" Association="CarsThisYearContext.EngineModelStyle">
+      <End Role="Engine" EntitySet="Engines" />
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+    </AssociationSet>
+    <EntitySet Name="Drivetrains" EntityType="CarsThisYearContext.Drivetrain" />
+    <AssociationSet Name="DrivetrainModelStyle" Association="CarsThisYearContext.DrivetrainModelStyle">
+      <End Role="Drivetrain" EntitySet="Drivetrains" />
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+    </AssociationSet>
+    <EntitySet Name="Transmissions" EntityType="CarsThisYearContext.Transmission" />
+    <AssociationSet Name="TransmissionModelStyle" Association="CarsThisYearContext.TransmissionModelStyle">
+      <End Role="Transmission" EntitySet="Transmissions" />
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+    </AssociationSet>
+    <EntitySet Name="ModelColors" EntityType="CarsThisYearContext.ModelColor" />
+    <AssociationSet Name="ModelStyleModelColor" Association="CarsThisYearContext.ModelStyleModelColor">
+      <End Role="ModelStyle" EntitySet="ModelStyles" />
+      <End Role="ModelColor" EntitySet="ModelColors" />
+    </AssociationSet>
+    <EntitySet Name="GeneralColors" EntityType="CarsThisYearContext.GeneralColor" />
+    <AssociationSet Name="ModelColorGeneralColor" Association="CarsThisYearContext.ModelColorGeneralColor">
+      <End Role="ModelColor" EntitySet="ModelColors" />
+      <End Role="GeneralColor" EntitySet="GeneralColors" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Make">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Models" Relationship="CarsThisYearContext.MakeModel" FromRole="Make" ToRole="Model" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="EngineId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Year" Type="String" Nullable="false" />
+    <NavigationProperty Name="Make" Relationship="CarsThisYearContext.MakeModel" FromRole="Model" ToRole="Make" />
+    <Property Name="MakeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.ModelModelStyle" FromRole="Model" ToRole="ModelStyle" />
+    <Property Name="Description" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="MakeModel">
+    <End Type="CarsThisYearContext.Make" Role="Make" Multiplicity="1" />
+    <End Type="CarsThisYearContext.Model" Role="Model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Make">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Model">
+        <PropertyRef Name="MakeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ModelStyle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="CarsThisYearContext.ModelModelStyle" FromRole="ModelStyle" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ModelType" Relationship="CarsThisYearContext.ModelStyleModelType" FromRole="ModelStyle" ToRole="ModelType" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Engine" Relationship="CarsThisYearContext.EngineModelStyle" FromRole="ModelStyle" ToRole="Engine" />
+    <Property Name="EngineId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Drivetrains" Relationship="CarsThisYearContext.DrivetrainModelStyle" FromRole="ModelStyle" ToRole="Drivetrain" />
+    <NavigationProperty Name="Transmissions" Relationship="CarsThisYearContext.TransmissionModelStyle" FromRole="ModelStyle" ToRole="Transmission" />
+    <NavigationProperty Name="ModelColors" Relationship="CarsThisYearContext.ModelStyleModelColor" FromRole="ModelStyle" ToRole="ModelColor" />
+  </EntityType>
+  <Association Name="ModelModelStyle">
+    <End Type="CarsThisYearContext.Model" Role="Model" Multiplicity="1" />
+    <End Type="CarsThisYearContext.ModelStyle" Role="ModelStyle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelStyle">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ModelType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="ModelStyle" Relationship="CarsThisYearContext.ModelStyleModelType" FromRole="ModelType" ToRole="ModelStyle" />
+  </EntityType>
+  <Association Name="ModelStyleModelType">
+    <End Type="CarsThisYearContext.ModelStyle" Role="ModelStyle" Multiplicity="1" />
+    <End Type="CarsThisYearContext.ModelType" Role="ModelType" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Engine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.EngineModelStyle" FromRole="Engine" ToRole="ModelStyle" />
+  </EntityType>
+  <Association Name="EngineModelStyle">
+    <End Type="CarsThisYearContext.Engine" Role="Engine" Multiplicity="1" />
+    <End Type="CarsThisYearContext.ModelStyle" Role="ModelStyle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Engine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelStyle">
+        <PropertyRef Name="EngineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Drivetrain">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.DrivetrainModelStyle" FromRole="Drivetrain" ToRole="ModelStyle" />
+  </EntityType>
+  <Association Name="DrivetrainModelStyle">
+    <End Type="CarsThisYearContext.Drivetrain" Role="Drivetrain" Multiplicity="*" />
+    <End Type="CarsThisYearContext.ModelStyle" Role="ModelStyle" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Transmission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.TransmissionModelStyle" FromRole="Transmission" ToRole="ModelStyle" />
+  </EntityType>
+  <Association Name="TransmissionModelStyle">
+    <End Type="CarsThisYearContext.Transmission" Role="Transmission" Multiplicity="*" />
+    <End Type="CarsThisYearContext.ModelStyle" Role="ModelStyle" Multiplicity="*" />
+  </Association>
+  <EntityType Name="ModelColor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="ModelStyle" Relationship="CarsThisYearContext.ModelStyleModelColor" FromRole="ModelColor" ToRole="ModelStyle" />
+    <Property Name="ModelStyleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GeneralColors" Relationship="CarsThisYearContext.ModelColorGeneralColor" FromRole="ModelColor" ToRole="GeneralColor" />
+  </EntityType>
+  <Association Name="ModelStyleModelColor">
+    <End Type="CarsThisYearContext.ModelStyle" Role="ModelStyle" Multiplicity="1" />
+    <End Type="CarsThisYearContext.ModelColor" Role="ModelColor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ModelStyle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelColor">
+        <PropertyRef Name="ModelStyleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GeneralColor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <NavigationProperty Name="ModelColor" Relationship="CarsThisYearContext.ModelColorGeneralColor" FromRole="GeneralColor" ToRole="ModelColor" />
+  </EntityType>
+  <Association Name="ModelColorGeneralColor">
+    <End Type="CarsThisYearContext.ModelColor" Role="ModelColor" Multiplicity="0..1" />
+    <End Type="CarsThisYearContext.GeneralColor" Role="GeneralColor" Multiplicity="*" />
+  </Association>
+</Schema>

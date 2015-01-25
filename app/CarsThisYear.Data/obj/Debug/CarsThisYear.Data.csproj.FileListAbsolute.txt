@@ -1,0 +1,10 @@
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\CarsThisYear.Data.dll.config
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\CarsThisYear.Data.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\CarsThisYear.Data.pdb
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\EntityFramework.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\EntityFramework.xml
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\obj\Debug\CarsThisYear.Data.csprojResolveAssemblyReference.cache
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\obj\Debug\CarsThisYear.Data.dll
+D:\_workarea\carsthisyear\app\CarsThisYear.Data\obj\Debug\CarsThisYear.Data.pdb
