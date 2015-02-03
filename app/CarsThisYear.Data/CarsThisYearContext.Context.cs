@@ -27,8 +27,8 @@ namespace CarsThisYear.Data
     
         public virtual DbSet<Make> Makes { get; set; }
         public virtual DbSet<Model> Models { get; set; }
+        public virtual DbSet<ModelSeries> ModelSeries { get; set; }
         public virtual DbSet<ModelStyle> ModelStyles { get; set; }
-        public virtual DbSet<ModelType> ModelTypes { get; set; }
         public virtual DbSet<Engine> Engines { get; set; }
         public virtual DbSet<Drivetrain> Drivetrains { get; set; }
         public virtual DbSet<Transmission> Transmissions { get; set; }

@@ -16,7 +16,7 @@ namespace CarsThisYear.Data
     {
         public Model()
         {
-            this.ModelStyles = new HashSet<ModelStyle>();
+            this.ModelStyles = new HashSet<ModelSeries>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace CarsThisYear.Data
         public string Description { get; set; }
     
         public virtual Make Make { get; set; }
-        public virtual ICollection<ModelStyle> ModelStyles { get; set; }
+        public virtual ICollection<ModelSeries> ModelStyles { get; set; }
     }
 }

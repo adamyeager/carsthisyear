@@ -1,5 +1,0 @@
-D:\_workarea\carsthisyear\app\CarsThisYear.Foundation\bin\Debug\CarsThisYear.Foundation.dll
-D:\_workarea\carsthisyear\app\CarsThisYear.Foundation\bin\Debug\CarsThisYear.Foundation.pdb
-D:\_workarea\carsthisyear\app\CarsThisYear.Foundation\obj\Debug\CarsThisYear.Foundation.csprojResolveAssemblyReference.cache
-D:\_workarea\carsthisyear\app\CarsThisYear.Foundation\obj\Debug\CarsThisYear.Foundation.dll
-D:\_workarea\carsthisyear\app\CarsThisYear.Foundation\obj\Debug\CarsThisYear.Foundation.pdb

@@ -81,10 +81,10 @@
     <Compile Include="ModelColor.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelStyle.cs">
+    <Compile Include="ModelSeries.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelType.cs">
+    <Compile Include="ModelStyle.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,0 @@
-D:\_workarea\carsthisyear\app\CarsThisYear.Logic\bin\Debug\CarsThisYear.Logic.dll
-D:\_workarea\carsthisyear\app\CarsThisYear.Logic\bin\Debug\CarsThisYear.Logic.pdb
-D:\_workarea\carsthisyear\app\CarsThisYear.Logic\obj\Debug\CarsThisYear.Logic.csprojResolveAssemblyReference.cache
-D:\_workarea\carsthisyear\app\CarsThisYear.Logic\obj\Debug\CarsThisYear.Logic.dll
-D:\_workarea\carsthisyear\app\CarsThisYear.Logic\obj\Debug\CarsThisYear.Logic.pdb

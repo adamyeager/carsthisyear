@@ -12,11 +12,20 @@ namespace CarsThisYear.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ModelType
+    public partial class ModelSeries
     {
+        public ModelSeries()
+        {
+            this.ModelStyles = new HashSet<ModelStyle>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
+        public int ModelId { get; set; }
+        public string Description { get; set; }
+        public int EngineId { get; set; }
     
-        public virtual ModelStyle ModelStyle { get; set; }
+        public virtual Model Model { get; set; }
+        public virtual ICollection<ModelStyle> ModelStyles { get; set; }
     }
 }
