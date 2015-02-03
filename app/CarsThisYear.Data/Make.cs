@@ -17,13 +17,18 @@ namespace CarsThisYear.Data
         public Make()
         {
             this.Models = new HashSet<Model>();
+            this.Engines = new HashSet<Engine>();
+            this.Drivetrains = new HashSet<Drivetrain>();
+            this.Transmissions = new HashSet<Transmission>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int EngineId { get; set; }
     
         public virtual ICollection<Model> Models { get; set; }
+        public virtual ICollection<Engine> Engines { get; set; }
+        public virtual ICollection<Drivetrain> Drivetrains { get; set; }
+        public virtual ICollection<Transmission> Transmissions { get; set; }
     }
 }

@@ -16,14 +16,14 @@ namespace CarsThisYear.Data
     {
         public ModelColor()
         {
-            this.GeneralColors = new HashSet<GeneralColor>();
             this.ModelStyles = new HashSet<ModelStyle>();
+            this.GeneralColors = new HashSet<GeneralColor>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<GeneralColor> GeneralColors { get; set; }
         public virtual ICollection<ModelStyle> ModelStyles { get; set; }
+        public virtual ICollection<GeneralColor> GeneralColors { get; set; }
     }
 }

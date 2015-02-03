@@ -11,18 +11,21 @@
         <EntityTypeShape EntityType="CarsThisYearContext.ModelSeries" Width="1.5" PointX="5.875" PointY="0.75" />
         <AssociationConnector Association="CarsThisYearContext.ModelModelStyle" />
         <EntityTypeShape EntityType="CarsThisYearContext.ModelStyle" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="CarsThisYearContext.Engine" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CarsThisYearContext.Drivetrain" Width="1.5" PointX="9.5" PointY="3.75" />
-        <EntityTypeShape EntityType="CarsThisYearContext.Transmission" Width="1.5" PointX="11.25" PointY="3.75" />
-        <EntityTypeShape EntityType="CarsThisYearContext.ModelColor" Width="1.5" PointX="13" PointY="3.75" />
-        <EntityTypeShape EntityType="CarsThisYearContext.GeneralColor" Width="1.5" PointX="13" PointY="6.25" />
-        <AssociationConnector Association="CarsThisYearContext.ModelColorGeneralColor" />
-        <AssociationConnector Association="CarsThisYearContext.ModelStyleEngine" />
-        <AssociationConnector Association="CarsThisYearContext.ModelStyleTransmission" />
-        <AssociationConnector Association="CarsThisYearContext.ModelStyleDrivetrain" />
+        <EntityTypeShape EntityType="CarsThisYearContext.Engine" Width="1.5" PointX="7.75" PointY="4.375" />
+        <EntityTypeShape EntityType="CarsThisYearContext.Drivetrain" Width="1.5" PointX="9.875" PointY="4.375" />
+        <EntityTypeShape EntityType="CarsThisYearContext.Transmission" Width="1.5" PointX="11.875" PointY="4" />
+        <EntityTypeShape EntityType="CarsThisYearContext.ModelColor" Width="1.5" PointX="13.875" PointY="0.75" />
+        <EntityTypeShape EntityType="CarsThisYearContext.GeneralColor" Width="1.5" PointX="13.875" PointY="3" />
         <AssociationConnector Association="CarsThisYearContext.ModelStyleModelColor" />
         <AssociationConnector Association="CarsThisYearContext.ModelSeriesModelStyle" />
-      </Diagram>
+        <AssociationConnector Association="CarsThisYearContext.ModelStyleEngine" />
+        <AssociationConnector Association="CarsThisYearContext.ModelStyleDrivetrain" />
+        <AssociationConnector Association="CarsThisYearContext.ModelStyleTransmission" />
+        <AssociationConnector Association="CarsThisYearContext.MakeEngine" />
+        <AssociationConnector Association="CarsThisYearContext.MakeDrivetrain" />
+        <AssociationConnector Association="CarsThisYearContext.MakeTransmission" />
+        <AssociationConnector Association="CarsThisYearContext.ModelColorGeneralColor" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

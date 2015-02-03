@@ -14,9 +14,14 @@ namespace CarsThisYear.Data
     
     public partial class GeneralColor
     {
+        public GeneralColor()
+        {
+            this.ModelColors = new HashSet<ModelColor>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ModelColor ModelColor { get; set; }
+        public virtual ICollection<ModelColor> ModelColors { get; set; }
     }
 }

@@ -16,12 +16,15 @@ namespace CarsThisYear.Data
     {
         public Transmission()
         {
-            this.ModelStyles = new HashSet<ModelStyle>();
+            this.Makes = new HashSet<Make>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public int ModelStyleId { get; set; }
     
-        public virtual ICollection<ModelStyle> ModelStyles { get; set; }
+        public virtual ModelStyle ModelStyle { get; set; }
+        public virtual ICollection<Make> Makes { get; set; }
     }
 }

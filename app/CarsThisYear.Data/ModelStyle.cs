@@ -16,20 +16,20 @@ namespace CarsThisYear.Data
     {
         public ModelStyle()
         {
-            this.Engines = new HashSet<Engine>();
-            this.Transmissions = new HashSet<Transmission>();
-            this.Drivetrains = new HashSet<Drivetrain>();
             this.ModelColors = new HashSet<ModelColor>();
+            this.Engines = new HashSet<Engine>();
+            this.Drivetrains = new HashSet<Drivetrain>();
+            this.Transmissions = new HashSet<Transmission>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public int ModelSeriesId { get; set; }
     
-        public virtual ICollection<Engine> Engines { get; set; }
-        public virtual ICollection<Transmission> Transmissions { get; set; }
-        public virtual ICollection<Drivetrain> Drivetrains { get; set; }
         public virtual ICollection<ModelColor> ModelColors { get; set; }
         public virtual ModelSeries ModelSery { get; set; }
+        public virtual ICollection<Engine> Engines { get; set; }
+        public virtual ICollection<Drivetrain> Drivetrains { get; set; }
+        public virtual ICollection<Transmission> Transmissions { get; set; }
     }
 }
