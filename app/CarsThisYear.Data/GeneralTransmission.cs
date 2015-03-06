@@ -12,26 +12,16 @@ namespace CarsThisYear.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Make
+    public partial class GeneralTransmission
     {
-        public Make()
+        public GeneralTransmission()
         {
-            this.Models = new HashSet<Model>();
-            this.Engines = new HashSet<Engine>();
-            this.Drivetrains = new HashSet<Drivetrain>();
             this.Transmissions = new HashSet<Transmission>();
-            this.Children = new HashSet<Make>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> ParentId { get; set; }
     
-        public virtual ICollection<Model> Models { get; set; }
-        public virtual ICollection<Engine> Engines { get; set; }
-        public virtual ICollection<Drivetrain> Drivetrains { get; set; }
         public virtual ICollection<Transmission> Transmissions { get; set; }
-        public virtual ICollection<Make> Children { get; set; }
-        public virtual Make Parent { get; set; }
     }
 }

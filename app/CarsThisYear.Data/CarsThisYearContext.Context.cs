@@ -34,5 +34,8 @@ namespace CarsThisYear.Data
         public virtual DbSet<Transmission> Transmissions { get; set; }
         public virtual DbSet<ModelColor> ModelColors { get; set; }
         public virtual DbSet<GeneralColor> GeneralColors { get; set; }
+        public virtual DbSet<GeneralTransmission> GeneralTransmissions { get; set; }
+        public virtual DbSet<GeneralDrivetrain> GeneralDrivetrains { get; set; }
+        public virtual DbSet<GeneralEngine> GeneralEngines { get; set; }
     }
 }

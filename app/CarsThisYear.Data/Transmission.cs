@@ -17,14 +17,15 @@ namespace CarsThisYear.Data
         public Transmission()
         {
             this.Makes = new HashSet<Make>();
+            this.GeneralTransmissions = new HashSet<GeneralTransmission>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
         public int ModelStyleId { get; set; }
     
         public virtual ModelStyle ModelStyle { get; set; }
         public virtual ICollection<Make> Makes { get; set; }
+        public virtual ICollection<GeneralTransmission> GeneralTransmissions { get; set; }
     }
 }

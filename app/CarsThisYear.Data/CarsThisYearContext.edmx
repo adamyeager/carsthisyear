@@ -15,6 +15,9 @@
     <EntitySet Name="Transmissions" EntityType="CarsThisYearContext.Store.Transmissions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ModelColors" EntityType="CarsThisYearContext.Store.ModelColors" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="GeneralColors" EntityType="CarsThisYearContext.Store.GeneralColors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneralTransmissions" EntityType="CarsThisYearContext.Store.GeneralTransmissions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneralDrivetrains" EntityType="CarsThisYearContext.Store.GeneralDrivetrains" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GeneralEngines" EntityType="CarsThisYearContext.Store.GeneralEngines" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ModelStyleModelColor" EntityType="CarsThisYearContext.Store.ModelStyleModelColor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ModelStyleEngine" EntityType="CarsThisYearContext.Store.ModelStyleEngine" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ModelStyleDrivetrain" EntityType="CarsThisYearContext.Store.ModelStyleDrivetrain" store:Type="Tables" Schema="dbo" />
@@ -22,6 +25,9 @@
     <EntitySet Name="MakeDrivetrain" EntityType="CarsThisYearContext.Store.MakeDrivetrain" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MakeTransmission" EntityType="CarsThisYearContext.Store.MakeTransmission" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ModelColorGeneralColor" EntityType="CarsThisYearContext.Store.ModelColorGeneralColor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransmissionGeneralTransmission" EntityType="CarsThisYearContext.Store.TransmissionGeneralTransmission" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DrivetrainGeneralDrivetrain" EntityType="CarsThisYearContext.Store.DrivetrainGeneralDrivetrain" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EngineGeneralEngine" EntityType="CarsThisYearContext.Store.EngineGeneralEngine" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="MakeModel" Association="CarsThisYearContext.Store.MakeModel">
       <End Role="Make" EntitySet="Makes" />
       <End Role="Model" EntitySet="Models" />
@@ -94,6 +100,34 @@
       <End Role="GeneralColor" EntitySet="GeneralColors" />
       <End Role="ModelColorGeneralColor" EntitySet="ModelColorGeneralColor" />
     </AssociationSet>
+    <AssociationSet Name="FK_TransmissionGeneralTransmission_Transmission" Association="CarsThisYearContext.Store.FK_TransmissionGeneralTransmission_Transmission">
+      <End Role="Transmission" EntitySet="Transmissions" />
+      <End Role="TransmissionGeneralTransmission" EntitySet="TransmissionGeneralTransmission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransmissionGeneralTransmission_GeneralTransmission" Association="CarsThisYearContext.Store.FK_TransmissionGeneralTransmission_GeneralTransmission">
+      <End Role="GeneralTransmission" EntitySet="GeneralTransmissions" />
+      <End Role="TransmissionGeneralTransmission" EntitySet="TransmissionGeneralTransmission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DrivetrainGeneralDrivetrain_Drivetrain" Association="CarsThisYearContext.Store.FK_DrivetrainGeneralDrivetrain_Drivetrain">
+      <End Role="Drivetrain" EntitySet="Drivetrains" />
+      <End Role="DrivetrainGeneralDrivetrain" EntitySet="DrivetrainGeneralDrivetrain" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain" Association="CarsThisYearContext.Store.FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain">
+      <End Role="GeneralDrivetrain" EntitySet="GeneralDrivetrains" />
+      <End Role="DrivetrainGeneralDrivetrain" EntitySet="DrivetrainGeneralDrivetrain" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EngineGeneralEngine_Engine" Association="CarsThisYearContext.Store.FK_EngineGeneralEngine_Engine">
+      <End Role="Engine" EntitySet="Engines" />
+      <End Role="EngineGeneralEngine" EntitySet="EngineGeneralEngine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EngineGeneralEngine_GeneralEngine" Association="CarsThisYearContext.Store.FK_EngineGeneralEngine_GeneralEngine">
+      <End Role="GeneralEngine" EntitySet="GeneralEngines" />
+      <End Role="EngineGeneralEngine" EntitySet="EngineGeneralEngine" />
+    </AssociationSet>
+    <AssociationSet Name="MakeMake" Association="CarsThisYearContext.Store.MakeMake">
+      <End Role="Make" EntitySet="Makes" />
+      <End Role="Make1" EntitySet="Makes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Makes">
     <Key>
@@ -101,7 +135,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Models">
     <Key>
@@ -109,9 +143,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
     <Property Name="MakeId" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="ModelSeries">
     <Key>
@@ -120,7 +153,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ModelId" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EngineId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ModelStyles">
@@ -137,7 +169,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Drivetrains">
     <Key>
@@ -145,7 +176,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Transmissions">
     <Key>
@@ -153,7 +183,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ModelStyleId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ModelColors">
@@ -169,6 +198,30 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeneralTransmissions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GeneralDrivetrains">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="GeneralEngines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShortName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Cylinders" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ModelStyleModelColor">
     <Key>
@@ -226,6 +279,30 @@
     <Property Name="ModelColors_Id" Type="int" Nullable="false" />
     <Property Name="GeneralColors_Id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="TransmissionGeneralTransmission">
+    <Key>
+      <PropertyRef Name="Transmissions_Id" />
+      <PropertyRef Name="GeneralTransmissions_Id" />
+    </Key>
+    <Property Name="Transmissions_Id" Type="int" Nullable="false" />
+    <Property Name="GeneralTransmissions_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DrivetrainGeneralDrivetrain">
+    <Key>
+      <PropertyRef Name="Drivetrains_Id" />
+      <PropertyRef Name="GeneralDrivetrains_Id" />
+    </Key>
+    <Property Name="Drivetrains_Id" Type="int" Nullable="false" />
+    <Property Name="GeneralDrivetrains_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EngineGeneralEngine">
+    <Key>
+      <PropertyRef Name="Engines_Id" />
+      <PropertyRef Name="GeneralEngines_Id" />
+    </Key>
+    <Property Name="Engines_Id" Type="int" Nullable="false" />
+    <Property Name="GeneralEngines_Id" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="MakeModel">
     <End Role="Make" Type="CarsThisYearContext.Store.Makes" Multiplicity="1" />
     <End Role="Model" Type="CarsThisYearContext.Store.Models" Multiplicity="*" />
@@ -271,6 +348,18 @@
       </Principal>
       <Dependent Role="Transmission">
         <PropertyRef Name="ModelStyleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MakeMake">
+    <End Role="Make" Type="CarsThisYearContext.Store.Makes" Multiplicity="0..1" />
+    <End Role="Make1" Type="CarsThisYearContext.Store.Makes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Make">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Make1">
+        <PropertyRef Name="ParentId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -442,6 +531,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TransmissionGeneralTransmission_Transmission">
+    <End Role="Transmission" Type="CarsThisYearContext.Store.Transmissions" Multiplicity="1" />
+    <End Role="TransmissionGeneralTransmission" Type="CarsThisYearContext.Store.TransmissionGeneralTransmission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transmission">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransmissionGeneralTransmission">
+        <PropertyRef Name="Transmissions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransmissionGeneralTransmission_GeneralTransmission">
+    <End Role="TransmissionGeneralTransmission" Type="CarsThisYearContext.Store.TransmissionGeneralTransmission" Multiplicity="*" />
+    <End Role="GeneralTransmission" Type="CarsThisYearContext.Store.GeneralTransmissions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="GeneralTransmission">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransmissionGeneralTransmission">
+        <PropertyRef Name="GeneralTransmissions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DrivetrainGeneralDrivetrain_Drivetrain">
+    <End Role="Drivetrain" Type="CarsThisYearContext.Store.Drivetrains" Multiplicity="1" />
+    <End Role="DrivetrainGeneralDrivetrain" Type="CarsThisYearContext.Store.DrivetrainGeneralDrivetrain" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivetrain">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DrivetrainGeneralDrivetrain">
+        <PropertyRef Name="Drivetrains_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain">
+    <End Role="DrivetrainGeneralDrivetrain" Type="CarsThisYearContext.Store.DrivetrainGeneralDrivetrain" Multiplicity="*" />
+    <End Role="GeneralDrivetrain" Type="CarsThisYearContext.Store.GeneralDrivetrains" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="GeneralDrivetrain">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DrivetrainGeneralDrivetrain">
+        <PropertyRef Name="GeneralDrivetrains_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EngineGeneralEngine_Engine">
+    <End Role="Engine" Type="CarsThisYearContext.Store.Engines" Multiplicity="1" />
+    <End Role="EngineGeneralEngine" Type="CarsThisYearContext.Store.EngineGeneralEngine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Engine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EngineGeneralEngine">
+        <PropertyRef Name="Engines_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EngineGeneralEngine_GeneralEngine">
+    <End Role="EngineGeneralEngine" Type="CarsThisYearContext.Store.EngineGeneralEngine" Multiplicity="*" />
+    <End Role="GeneralEngine" Type="CarsThisYearContext.Store.GeneralEngines" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="GeneralEngine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EngineGeneralEngine">
+        <PropertyRef Name="GeneralEngines_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -500,6 +661,25 @@
             <End Role="ModelColor" EntitySet="ModelColors" />
             <End Role="GeneralColor" EntitySet="GeneralColors" />
           </AssociationSet>
+          <EntitySet Name="GeneralTransmissions" EntityType="CarsThisYearContext.GeneralTransmission" />
+          <AssociationSet Name="TransmissionGeneralTransmission" Association="CarsThisYearContext.TransmissionGeneralTransmission">
+            <End Role="Transmission" EntitySet="Transmissions" />
+            <End Role="GeneralTransmission" EntitySet="GeneralTransmissions" />
+          </AssociationSet>
+          <EntitySet Name="GeneralDrivetrains" EntityType="CarsThisYearContext.GeneralDrivetrain" />
+          <AssociationSet Name="DrivetrainGeneralDrivetrain" Association="CarsThisYearContext.DrivetrainGeneralDrivetrain">
+            <End Role="Drivetrain" EntitySet="Drivetrains" />
+            <End Role="GeneralDrivetrain" EntitySet="GeneralDrivetrains" />
+          </AssociationSet>
+          <EntitySet Name="GeneralEngines" EntityType="CarsThisYearContext.GeneralEngine" />
+          <AssociationSet Name="EngineGeneralEngine" Association="CarsThisYearContext.EngineGeneralEngine">
+            <End Role="Engine" EntitySet="Engines" />
+            <End Role="GeneralEngine" EntitySet="GeneralEngines" />
+          </AssociationSet>
+          <AssociationSet Name="MakeMake" Association="CarsThisYearContext.MakeMake">
+            <End Role="Make" EntitySet="Makes" />
+            <End Role="Make1" EntitySet="Makes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Make">
           <Key>
@@ -508,10 +688,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Models" Relationship="CarsThisYearContext.MakeModel" FromRole="Make" ToRole="Model" />
-          <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="Engines" Relationship="CarsThisYearContext.MakeEngine" FromRole="Make" ToRole="Engine" />
           <NavigationProperty Name="Drivetrains" Relationship="CarsThisYearContext.MakeDrivetrain" FromRole="Make" ToRole="Drivetrain" />
           <NavigationProperty Name="Transmissions" Relationship="CarsThisYearContext.MakeTransmission" FromRole="Make" ToRole="Transmission" />
+          <NavigationProperty Name="Children" Relationship="CarsThisYearContext.MakeMake" FromRole="Make" ToRole="Make1" />
+          <NavigationProperty Name="Parent" Relationship="CarsThisYearContext.MakeMake" FromRole="Make1" ToRole="Make" />
+          <Property Name="ParentId" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -519,11 +701,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Year" Type="String" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Make" Relationship="CarsThisYearContext.MakeModel" FromRole="Model" ToRole="Make" />
           <Property Name="MakeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.ModelModelStyle" FromRole="Model" ToRole="ModelStyle" />
-          <Property Name="Description" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="MakeModel">
           <End Type="CarsThisYearContext.Make" Role="Make" Multiplicity="1" />
@@ -545,7 +726,6 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Model" Relationship="CarsThisYearContext.ModelModelStyle" FromRole="ModelStyle" ToRole="Model" />
           <Property Name="ModelId" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
           <Property Name="EngineId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.ModelSeriesModelStyle" FromRole="ModelSeries" ToRole="ModelStyle" />
         </EntityType>
@@ -580,9 +760,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.ModelStyleEngine" FromRole="Engine" ToRole="ModelStyle" />
           <NavigationProperty Name="Makes" Relationship="CarsThisYearContext.MakeEngine" FromRole="Engine" ToRole="Make" />
+          <NavigationProperty Name="GeneralEngines" Relationship="CarsThisYearContext.EngineGeneralEngine" FromRole="Engine" ToRole="GeneralEngine" />
         </EntityType>
         <EntityType Name="Drivetrain">
           <Key>
@@ -590,9 +770,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="ModelStyles" Relationship="CarsThisYearContext.ModelStyleDrivetrain" FromRole="Drivetrain" ToRole="ModelStyle" />
           <NavigationProperty Name="Makes" Relationship="CarsThisYearContext.MakeDrivetrain" FromRole="Drivetrain" ToRole="Make" />
+          <NavigationProperty Name="GeneralDrivetrains" Relationship="CarsThisYearContext.DrivetrainGeneralDrivetrain" FromRole="Drivetrain" ToRole="GeneralDrivetrain" />
         </EntityType>
         <EntityType Name="Transmission">
           <Key>
@@ -600,10 +780,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="ModelStyle" Relationship="CarsThisYearContext.ModelStyleTransmission" FromRole="Transmission" ToRole="ModelStyle" />
           <Property Name="ModelStyleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Makes" Relationship="CarsThisYearContext.MakeTransmission" FromRole="Transmission" ToRole="Make" />
+          <NavigationProperty Name="GeneralTransmissions" Relationship="CarsThisYearContext.TransmissionGeneralTransmission" FromRole="Transmission" ToRole="GeneralTransmission" />
         </EntityType>
         <EntityType Name="ModelColor">
           <Key>
@@ -674,6 +854,57 @@
           <End Type="CarsThisYearContext.ModelColor" Role="ModelColor" Multiplicity="*" />
           <End Type="CarsThisYearContext.GeneralColor" Role="GeneralColor" Multiplicity="*" />
         </Association>
+        <EntityType Name="GeneralTransmission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Transmissions" Relationship="CarsThisYearContext.TransmissionGeneralTransmission" FromRole="GeneralTransmission" ToRole="Transmission" />
+        </EntityType>
+        <Association Name="TransmissionGeneralTransmission">
+          <End Type="CarsThisYearContext.Transmission" Role="Transmission" Multiplicity="*" />
+          <End Type="CarsThisYearContext.GeneralTransmission" Role="GeneralTransmission" Multiplicity="*" />
+        </Association>
+        <EntityType Name="GeneralDrivetrain">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Drivetrains" Relationship="CarsThisYearContext.DrivetrainGeneralDrivetrain" FromRole="GeneralDrivetrain" ToRole="Drivetrain" />
+          <Property Name="ShortName" Type="String" Nullable="true" />
+        </EntityType>
+        <Association Name="DrivetrainGeneralDrivetrain">
+          <End Type="CarsThisYearContext.Drivetrain" Role="Drivetrain" Multiplicity="*" />
+          <End Type="CarsThisYearContext.GeneralDrivetrain" Role="GeneralDrivetrain" Multiplicity="*" />
+        </Association>
+        <EntityType Name="GeneralEngine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Engines" Relationship="CarsThisYearContext.EngineGeneralEngine" FromRole="GeneralEngine" ToRole="Engine" />
+          <Property Name="ShortName" Type="String" Nullable="true" />
+          <Property Name="Cylinders" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EngineGeneralEngine">
+          <End Type="CarsThisYearContext.Engine" Role="Engine" Multiplicity="*" />
+          <End Type="CarsThisYearContext.GeneralEngine" Role="GeneralEngine" Multiplicity="*" />
+        </Association>
+        <Association Name="MakeMake">
+          <End Type="CarsThisYearContext.Make" Role="Make" Multiplicity="0..1" />
+          <End Type="CarsThisYearContext.Make" Role="Make1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Make">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Make1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -685,7 +916,7 @@
         <MappingFragment StoreEntitySet="Makes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -696,7 +927,6 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Year" ColumnName="Year" />
           <ScalarProperty Name="MakeId" ColumnName="MakeId" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -706,7 +936,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ModelId" ColumnName="ModelId" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="EngineId" ColumnName="EngineId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -725,7 +954,6 @@
         <MappingFragment StoreEntitySet="Engines">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -734,7 +962,6 @@
         <MappingFragment StoreEntitySet="Drivetrains">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -743,7 +970,6 @@
         <MappingFragment StoreEntitySet="Transmissions">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ModelStyleId" ColumnName="ModelStyleId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -761,6 +987,33 @@
         <MappingFragment StoreEntitySet="GeneralColors">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralTransmissions">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.GeneralTransmission)">
+        <MappingFragment StoreEntitySet="GeneralTransmissions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralDrivetrains">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.GeneralDrivetrain)">
+        <MappingFragment StoreEntitySet="GeneralDrivetrains">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralEngines">
+      <EntityTypeMapping TypeName="IsTypeOf(CarsThisYearContext.GeneralEngine)">
+        <MappingFragment StoreEntitySet="GeneralEngines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="Cylinders" ColumnName="Cylinders" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -818,6 +1071,30 @@
       </EndProperty>
       <EndProperty Name="GeneralColor">
         <ScalarProperty Name="Id" ColumnName="GeneralColors_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TransmissionGeneralTransmission" TypeName="CarsThisYearContext.TransmissionGeneralTransmission" StoreEntitySet="TransmissionGeneralTransmission">
+      <EndProperty Name="Transmission">
+        <ScalarProperty Name="Id" ColumnName="Transmissions_Id" />
+      </EndProperty>
+      <EndProperty Name="GeneralTransmission">
+        <ScalarProperty Name="Id" ColumnName="GeneralTransmissions_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DrivetrainGeneralDrivetrain" TypeName="CarsThisYearContext.DrivetrainGeneralDrivetrain" StoreEntitySet="DrivetrainGeneralDrivetrain">
+      <EndProperty Name="Drivetrain">
+        <ScalarProperty Name="Id" ColumnName="Drivetrains_Id" />
+      </EndProperty>
+      <EndProperty Name="GeneralDrivetrain">
+        <ScalarProperty Name="Id" ColumnName="GeneralDrivetrains_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="EngineGeneralEngine" TypeName="CarsThisYearContext.EngineGeneralEngine" StoreEntitySet="EngineGeneralEngine">
+      <EndProperty Name="Engine">
+        <ScalarProperty Name="Id" ColumnName="Engines_Id" />
+      </EndProperty>
+      <EndProperty Name="GeneralEngine">
+        <ScalarProperty Name="Id" ColumnName="GeneralEngines_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

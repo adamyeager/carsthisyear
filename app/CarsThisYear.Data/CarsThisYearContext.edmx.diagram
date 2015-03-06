@@ -25,6 +25,13 @@
         <AssociationConnector Association="CarsThisYearContext.MakeDrivetrain" />
         <AssociationConnector Association="CarsThisYearContext.MakeTransmission" />
         <AssociationConnector Association="CarsThisYearContext.ModelColorGeneralColor" />
+        <EntityTypeShape EntityType="CarsThisYearContext.GeneralTransmission" Width="1.5" PointX="11.875" PointY="7" />
+        <AssociationConnector Association="CarsThisYearContext.TransmissionGeneralTransmission" />
+        <EntityTypeShape EntityType="CarsThisYearContext.GeneralDrivetrain" Width="1.5" PointX="9.875" PointY="7" />
+        <AssociationConnector Association="CarsThisYearContext.DrivetrainGeneralDrivetrain" />
+        <EntityTypeShape EntityType="CarsThisYearContext.GeneralEngine" Width="1.5" PointX="7.75" PointY="7" />
+        <AssociationConnector Association="CarsThisYearContext.EngineGeneralEngine" />
+        <AssociationConnector Association="CarsThisYearContext.MakeMake" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

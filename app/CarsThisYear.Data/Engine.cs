@@ -18,13 +18,14 @@ namespace CarsThisYear.Data
         {
             this.ModelStyles = new HashSet<ModelStyle>();
             this.Makes = new HashSet<Make>();
+            this.GeneralEngines = new HashSet<GeneralEngine>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
     
         public virtual ICollection<ModelStyle> ModelStyles { get; set; }
         public virtual ICollection<Make> Makes { get; set; }
+        public virtual ICollection<GeneralEngine> GeneralEngines { get; set; }
     }
 }

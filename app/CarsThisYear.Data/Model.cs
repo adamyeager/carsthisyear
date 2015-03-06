@@ -21,9 +21,8 @@ namespace CarsThisYear.Data
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Year { get; set; }
+        public int Year { get; set; }
         public int MakeId { get; set; }
-        public string Description { get; set; }
     
         public virtual Make Make { get; set; }
         public virtual ICollection<ModelSeries> ModelStyles { get; set; }

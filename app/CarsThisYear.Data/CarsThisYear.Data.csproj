@@ -72,6 +72,15 @@
     <Compile Include="GeneralColor.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeneralDrivetrain.cs">
+      <DependentUpon>CarsThisYearContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralEngine.cs">
+      <DependentUpon>CarsThisYearContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralTransmission.cs">
+      <DependentUpon>CarsThisYearContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Make.cs">
       <DependentUpon>CarsThisYearContext.tt</DependentUpon>
     </Compile>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/02/2015 23:44:36
+-- Date Created: 03/05/2015 19:32:16
 -- Generated from EDMX file: D:\_workarea\carsthisyear\app\CarsThisYear.Data\CarsThisYearContext.edmx
 -- --------------------------------------------------
 
@@ -22,9 +22,6 @@ IF OBJECT_ID(N'[dbo].[FK_MakeModel]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ModelModelStyle]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ModelSeries] DROP CONSTRAINT [FK_ModelModelStyle];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ModelColorGeneralColor]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GeneralColors] DROP CONSTRAINT [FK_ModelColorGeneralColor];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ModelStyleModelColor_ModelStyle]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ModelStyleModelColor] DROP CONSTRAINT [FK_ModelStyleModelColor_ModelStyle];
@@ -68,6 +65,33 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MakeTransmission_Transmission]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MakeTransmission] DROP CONSTRAINT [FK_MakeTransmission_Transmission];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ModelColorGeneralColor_ModelColor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ModelColorGeneralColor] DROP CONSTRAINT [FK_ModelColorGeneralColor_ModelColor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ModelColorGeneralColor_GeneralColor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ModelColorGeneralColor] DROP CONSTRAINT [FK_ModelColorGeneralColor_GeneralColor];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransmissionGeneralTransmission_Transmission]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TransmissionGeneralTransmission] DROP CONSTRAINT [FK_TransmissionGeneralTransmission_Transmission];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TransmissionGeneralTransmission_GeneralTransmission]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TransmissionGeneralTransmission] DROP CONSTRAINT [FK_TransmissionGeneralTransmission_GeneralTransmission];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DrivetrainGeneralDrivetrain_Drivetrain]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DrivetrainGeneralDrivetrain] DROP CONSTRAINT [FK_DrivetrainGeneralDrivetrain_Drivetrain];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DrivetrainGeneralDrivetrain] DROP CONSTRAINT [FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EngineGeneralEngine_Engine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EngineGeneralEngine] DROP CONSTRAINT [FK_EngineGeneralEngine_Engine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EngineGeneralEngine_GeneralEngine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EngineGeneralEngine] DROP CONSTRAINT [FK_EngineGeneralEngine_GeneralEngine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MakeMake]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Makes] DROP CONSTRAINT [FK_MakeMake];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -100,6 +124,15 @@ GO
 IF OBJECT_ID(N'[dbo].[GeneralColors]', 'U') IS NOT NULL
     DROP TABLE [dbo].[GeneralColors];
 GO
+IF OBJECT_ID(N'[dbo].[GeneralTransmissions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GeneralTransmissions];
+GO
+IF OBJECT_ID(N'[dbo].[GeneralDrivetrains]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GeneralDrivetrains];
+GO
+IF OBJECT_ID(N'[dbo].[GeneralEngines]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GeneralEngines];
+GO
 IF OBJECT_ID(N'[dbo].[ModelStyleModelColor]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ModelStyleModelColor];
 GO
@@ -118,6 +151,18 @@ GO
 IF OBJECT_ID(N'[dbo].[MakeTransmission]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MakeTransmission];
 GO
+IF OBJECT_ID(N'[dbo].[ModelColorGeneralColor]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ModelColorGeneralColor];
+GO
+IF OBJECT_ID(N'[dbo].[TransmissionGeneralTransmission]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TransmissionGeneralTransmission];
+GO
+IF OBJECT_ID(N'[dbo].[DrivetrainGeneralDrivetrain]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DrivetrainGeneralDrivetrain];
+GO
+IF OBJECT_ID(N'[dbo].[EngineGeneralEngine]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EngineGeneralEngine];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -127,7 +172,7 @@ GO
 CREATE TABLE [dbo].[Makes] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [ParentId] int  NULL
 );
 GO
 
@@ -135,9 +180,8 @@ GO
 CREATE TABLE [dbo].[Models] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Year] nvarchar(max)  NOT NULL,
-    [MakeId] int  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Year] int  NOT NULL,
+    [MakeId] int  NOT NULL
 );
 GO
 
@@ -146,7 +190,6 @@ CREATE TABLE [dbo].[ModelSeries] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [ModelId] int  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
     [EngineId] int  NOT NULL
 );
 GO
@@ -162,16 +205,14 @@ GO
 -- Creating table 'Engines'
 CREATE TABLE [dbo].[Engines] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Drivetrains'
 CREATE TABLE [dbo].[Drivetrains] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -179,7 +220,6 @@ GO
 CREATE TABLE [dbo].[Transmissions] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
     [ModelStyleId] int  NOT NULL
 );
 GO
@@ -195,6 +235,30 @@ GO
 CREATE TABLE [dbo].[GeneralColors] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'GeneralTransmissions'
+CREATE TABLE [dbo].[GeneralTransmissions] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'GeneralDrivetrains'
+CREATE TABLE [dbo].[GeneralDrivetrains] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [ShortName] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'GeneralEngines'
+CREATE TABLE [dbo].[GeneralEngines] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [ShortName] nvarchar(max)  NULL,
+    [Cylinders] int  NOT NULL
 );
 GO
 
@@ -244,6 +308,27 @@ GO
 CREATE TABLE [dbo].[ModelColorGeneralColor] (
     [ModelColors_Id] int  NOT NULL,
     [GeneralColors_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'TransmissionGeneralTransmission'
+CREATE TABLE [dbo].[TransmissionGeneralTransmission] (
+    [Transmissions_Id] int  NOT NULL,
+    [GeneralTransmissions_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'DrivetrainGeneralDrivetrain'
+CREATE TABLE [dbo].[DrivetrainGeneralDrivetrain] (
+    [Drivetrains_Id] int  NOT NULL,
+    [GeneralDrivetrains_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'EngineGeneralEngine'
+CREATE TABLE [dbo].[EngineGeneralEngine] (
+    [Engines_Id] int  NOT NULL,
+    [GeneralEngines_Id] int  NOT NULL
 );
 GO
 
@@ -305,6 +390,24 @@ ADD CONSTRAINT [PK_GeneralColors]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'GeneralTransmissions'
+ALTER TABLE [dbo].[GeneralTransmissions]
+ADD CONSTRAINT [PK_GeneralTransmissions]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'GeneralDrivetrains'
+ALTER TABLE [dbo].[GeneralDrivetrains]
+ADD CONSTRAINT [PK_GeneralDrivetrains]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'GeneralEngines'
+ALTER TABLE [dbo].[GeneralEngines]
+ADD CONSTRAINT [PK_GeneralEngines]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [ModelStyles_Id], [ModelColors_Id] in table 'ModelStyleModelColor'
 ALTER TABLE [dbo].[ModelStyleModelColor]
 ADD CONSTRAINT [PK_ModelStyleModelColor]
@@ -345,6 +448,24 @@ GO
 ALTER TABLE [dbo].[ModelColorGeneralColor]
 ADD CONSTRAINT [PK_ModelColorGeneralColor]
     PRIMARY KEY CLUSTERED ([ModelColors_Id], [GeneralColors_Id] ASC);
+GO
+
+-- Creating primary key on [Transmissions_Id], [GeneralTransmissions_Id] in table 'TransmissionGeneralTransmission'
+ALTER TABLE [dbo].[TransmissionGeneralTransmission]
+ADD CONSTRAINT [PK_TransmissionGeneralTransmission]
+    PRIMARY KEY CLUSTERED ([Transmissions_Id], [GeneralTransmissions_Id] ASC);
+GO
+
+-- Creating primary key on [Drivetrains_Id], [GeneralDrivetrains_Id] in table 'DrivetrainGeneralDrivetrain'
+ALTER TABLE [dbo].[DrivetrainGeneralDrivetrain]
+ADD CONSTRAINT [PK_DrivetrainGeneralDrivetrain]
+    PRIMARY KEY CLUSTERED ([Drivetrains_Id], [GeneralDrivetrains_Id] ASC);
+GO
+
+-- Creating primary key on [Engines_Id], [GeneralEngines_Id] in table 'EngineGeneralEngine'
+ALTER TABLE [dbo].[EngineGeneralEngine]
+ADD CONSTRAINT [PK_EngineGeneralEngine]
+    PRIMARY KEY CLUSTERED ([Engines_Id], [GeneralEngines_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -577,6 +698,93 @@ GO
 CREATE INDEX [IX_FK_ModelColorGeneralColor_GeneralColor]
 ON [dbo].[ModelColorGeneralColor]
     ([GeneralColors_Id]);
+GO
+
+-- Creating foreign key on [Transmissions_Id] in table 'TransmissionGeneralTransmission'
+ALTER TABLE [dbo].[TransmissionGeneralTransmission]
+ADD CONSTRAINT [FK_TransmissionGeneralTransmission_Transmission]
+    FOREIGN KEY ([Transmissions_Id])
+    REFERENCES [dbo].[Transmissions]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [GeneralTransmissions_Id] in table 'TransmissionGeneralTransmission'
+ALTER TABLE [dbo].[TransmissionGeneralTransmission]
+ADD CONSTRAINT [FK_TransmissionGeneralTransmission_GeneralTransmission]
+    FOREIGN KEY ([GeneralTransmissions_Id])
+    REFERENCES [dbo].[GeneralTransmissions]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TransmissionGeneralTransmission_GeneralTransmission'
+CREATE INDEX [IX_FK_TransmissionGeneralTransmission_GeneralTransmission]
+ON [dbo].[TransmissionGeneralTransmission]
+    ([GeneralTransmissions_Id]);
+GO
+
+-- Creating foreign key on [Drivetrains_Id] in table 'DrivetrainGeneralDrivetrain'
+ALTER TABLE [dbo].[DrivetrainGeneralDrivetrain]
+ADD CONSTRAINT [FK_DrivetrainGeneralDrivetrain_Drivetrain]
+    FOREIGN KEY ([Drivetrains_Id])
+    REFERENCES [dbo].[Drivetrains]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [GeneralDrivetrains_Id] in table 'DrivetrainGeneralDrivetrain'
+ALTER TABLE [dbo].[DrivetrainGeneralDrivetrain]
+ADD CONSTRAINT [FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain]
+    FOREIGN KEY ([GeneralDrivetrains_Id])
+    REFERENCES [dbo].[GeneralDrivetrains]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain'
+CREATE INDEX [IX_FK_DrivetrainGeneralDrivetrain_GeneralDrivetrain]
+ON [dbo].[DrivetrainGeneralDrivetrain]
+    ([GeneralDrivetrains_Id]);
+GO
+
+-- Creating foreign key on [Engines_Id] in table 'EngineGeneralEngine'
+ALTER TABLE [dbo].[EngineGeneralEngine]
+ADD CONSTRAINT [FK_EngineGeneralEngine_Engine]
+    FOREIGN KEY ([Engines_Id])
+    REFERENCES [dbo].[Engines]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [GeneralEngines_Id] in table 'EngineGeneralEngine'
+ALTER TABLE [dbo].[EngineGeneralEngine]
+ADD CONSTRAINT [FK_EngineGeneralEngine_GeneralEngine]
+    FOREIGN KEY ([GeneralEngines_Id])
+    REFERENCES [dbo].[GeneralEngines]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EngineGeneralEngine_GeneralEngine'
+CREATE INDEX [IX_FK_EngineGeneralEngine_GeneralEngine]
+ON [dbo].[EngineGeneralEngine]
+    ([GeneralEngines_Id]);
+GO
+
+-- Creating foreign key on [ParentId] in table 'Makes'
+ALTER TABLE [dbo].[Makes]
+ADD CONSTRAINT [FK_MakeMake]
+    FOREIGN KEY ([ParentId])
+    REFERENCES [dbo].[Makes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_MakeMake'
+CREATE INDEX [IX_FK_MakeMake]
+ON [dbo].[Makes]
+    ([ParentId]);
 GO
 
 -- --------------------------------------------------
